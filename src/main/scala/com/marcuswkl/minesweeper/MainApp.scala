@@ -1,5 +1,6 @@
 package com.marcuswkl.minesweeper
 
+import javafx.scene.control.SplitPane
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -27,6 +28,7 @@ object MainApp extends JFXApp {
     icons += new Image(getClass.getResourceAsStream("images/minesweeper-icon.png"))
   }
 
+  // Display the menu
   def showMenu(): Unit = {
     val resource = getClass.getResourceAsStream("view/Menu.fxml")
     val loader = new FXMLLoader(null, NoDependencyResolver)
@@ -35,8 +37,13 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
 
+  // Display the game
   def showGame(): Unit = {
-    // Show game code
+    val resource = getClass.getResourceAsStream("view/Game.fxml")
+    val loader = new FXMLLoader(null, NoDependencyResolver)
+    loader.load(resource);
+    val roots = loader.getRoot[SplitPane]
+    this.roots.setCenter(roots)
   }
 
   // Display the menu when the app starts
