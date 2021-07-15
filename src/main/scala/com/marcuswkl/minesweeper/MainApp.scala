@@ -4,7 +4,7 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
-import javafx.scene.layout.BorderPane
+import javafx.scene.layout.{AnchorPane, BorderPane}
 import scalafx.scene.image.Image
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
@@ -26,4 +26,20 @@ object MainApp extends JFXApp {
     }
     icons += new Image(getClass.getResourceAsStream("images/minesweeper-icon.png"))
   }
+
+  def showMenu(): Unit = {
+    val resource = getClass.getResourceAsStream("view/Menu.fxml")
+    val loader = new FXMLLoader(null, NoDependencyResolver)
+    loader.load(resource);
+    val roots = loader.getRoot[AnchorPane]
+    this.roots.setCenter(roots)
+  }
+
+  def showGame(): Unit = {
+    // Show game code
+  }
+
+  // Display the menu when the app starts
+  showMenu()
+
 }
