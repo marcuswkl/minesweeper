@@ -5,6 +5,7 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import javafx.scene.layout.BorderPane
+import scalafx.scene.image.Image
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
 object MainApp extends JFXApp {
@@ -13,7 +14,7 @@ object MainApp extends JFXApp {
   // Initialise the loader object
   val loader = new FXMLLoader(null, NoDependencyResolver)
   // Load root layout from fxml file
-  loader.load(rootResource);
+  loader.load(rootResource)
   // Retrieve the root component BorderPane from the FXML
   val roots = loader.getRoot[BorderPane]
 
@@ -23,6 +24,6 @@ object MainApp extends JFXApp {
     scene = new Scene {
       root = roots
     }
-    // icons += new Image(getClass.getResourceAsStream(""))
+    icons += new Image(getClass.getResourceAsStream("images/minesweeper-icon.png"))
   }
 }
