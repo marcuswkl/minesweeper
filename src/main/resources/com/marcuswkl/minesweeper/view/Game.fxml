@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="350.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="350.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marcuswkl.minesweeper.view.GameController">
   <items>
       <GridPane>
         <columnConstraints>
@@ -22,142 +22,142 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="000" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label fx:id="mineCounter" text="000" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <Label text="000" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label fx:id="timeCounter" text="000" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <ImageView fx:id="emojiButton" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
-      <TilePane alignment="CENTER" hgap="1.0" prefHeight="200.0" prefTileHeight="50.0" prefTileWidth="50.0" prefWidth="200.0" vgap="1.0">
+      <TilePane fx:id="mineField" alignment="CENTER" hgap="1.0" prefHeight="200.0" prefTileHeight="50.0" prefTileWidth="50.0" prefWidth="200.0" vgap="1.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile1" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile2" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile3" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile4" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile5" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile6" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile7" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile8" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile9" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile10" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile11" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile12" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile13" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile14" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile15" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile16" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile17" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile18" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile19" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile20" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile21" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile22" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile23" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile24" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button fx:id="tile25" mnemonicParsing="false" onAction="#handleClick" prefHeight="50.0" prefWidth="50.0">
                <font>
                   <Font size="18.0" />
                </font>
