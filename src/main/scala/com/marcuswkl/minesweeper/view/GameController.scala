@@ -1,6 +1,6 @@
 package com.marcuswkl.minesweeper.view
 
-import com.marcuswkl.minesweeper.model.Game
+import com.marcuswkl.minesweeper.model.{EmojiButton, Game}
 import javafx.{scene => jfxs}
 import scalafx.Includes._
 import scalafx.application.Platform
@@ -28,6 +28,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
   val gameInstance = new Game()
   mineCounter.text = gameInstance.mineCounter.displayCounterValue()
   timeCounter.text = gameInstance.timeCounter.displayCounterValue()
+  emojiButton.image = EmojiButton.emojiSmile
 
   // Start updating the counter each second
   def startTimeCounter(): Unit = {
