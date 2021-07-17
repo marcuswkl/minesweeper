@@ -11,6 +11,7 @@ import scalafxml.core.macros.sfxml
 
 import java.util.{Timer, TimerTask}
 import javafx.{scene => jfxs}
+import scalafx.scene.effect.InnerShadow
 
 @sfxml
 class GameController(private val mineCounter: Label, private val timeCounter: Label, private val emojiButton: ImageView,
@@ -36,7 +37,9 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     tile12, tile13, tile14, tile15, tile16, tile17, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25)
 
   // Generate tiles for minefield
-  gameInstance.mineField.listOfTiles = gameInstance.mineField.generateTiles()
+  gameInstance.mineField.listOfTiles =
+    gameInstance.mineField.generateNumberTiles(gameInstance.mineField.generateMineAndEmptyTiles())
+  println(gameInstance.mineField.listOfTiles.mkString("Array(", ", ", ")"))
 
   // Initialise mine counter text
   gameInstance.mineCounter.counterValue = gameInstance.mineField.noOfMineTiles
@@ -81,6 +84,8 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     val tileNo = buttonFXId.substring(4).toInt
     // Unhide the button text to show the symbol
     tileButton.setTextFill(Color.Black)
+    // Change the look of the button to indicate clicked
+    tileButton.setEffect(new InnerShadow())
     // Get the corresponding tile
     // Tile number decremented to align with array index
     val tile = gameInstance.mineField.listOfTiles(tileNo - 1)
