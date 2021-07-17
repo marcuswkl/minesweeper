@@ -5,10 +5,12 @@ import scala.util.Random
 
 class MineField(val noOfTiles: Int) {
   var listOfTiles: Array[Tile] = Array[Tile]()
+  var noOfEmptyTiles: Int = 0
+  var noOfNumberTiles: Int = 0
   var noOfMineTiles: Int = 0
 
   // Generate mine tiles and empty tiles for minefield randomly
-  def generateMineAndEmptyTiles(): ListBuffer[Tile] = {
+  def generateEmptyAndMineTiles(): ListBuffer[Tile] = {
     val tempListBuffer: ListBuffer[Tile] = ListBuffer[Tile]()
     for (_ <- 1 to noOfTiles) {
       if (Random.nextDouble() <= 0.2) {
@@ -16,33 +18,36 @@ class MineField(val noOfTiles: Int) {
         noOfMineTiles += 1
       } else {
         tempListBuffer += new EmptyTile()
+        noOfEmptyTiles += 1
       }
     }
     tempListBuffer
   }
 
   // Generate number tiles to indicate mines for minefield
-  def generateNumberTiles(mineAndEmptyTiles: ListBuffer[Tile]): Array[Tile] = {
+  def generateNumberTiles(emptyAndMineTiles: ListBuffer[Tile]): Array[Tile] = {
     var tileNo = 1
     for (_ <- 1 to noOfTiles) {
       // Check if the current tile is a mine tile
-      if (mineAndEmptyTiles(tileNo - 1).tileType == "mine") {
+      if (emptyAndMineTiles(tileNo - 1).tileType == "mine") {
         // Obtain the tile numbers of the surrounding tiles
         val surroundingTilesNo = obtainSurroundingTilesNo(tileNo)
         for (surroundingTileNo <- surroundingTilesNo) {
-            // Replace the tile with a number tile if it is an empty tile
-            if (mineAndEmptyTiles(surroundingTileNo - 1).tileType == "empty") {
-              mineAndEmptyTiles(surroundingTileNo - 1) = new NumberTile()
+            // If it is an empty tile, replace the empty tile with a number tile
+            if (emptyAndMineTiles(surroundingTileNo - 1).tileType == "empty") {
+              emptyAndMineTiles(surroundingTileNo - 1) = new NumberTile()
+              noOfEmptyTiles -= 1
+              noOfNumberTiles += 1
             }
-            // Increment the number of the tile if it is a number tile
-            else if (mineAndEmptyTiles(surroundingTileNo - 1).tileType == "number") {
-              mineAndEmptyTiles(surroundingTileNo - 1).asInstanceOf[NumberTile].incrementNumber()
+            // If it is a number tile, increment the number of the tile
+            else if (emptyAndMineTiles(surroundingTileNo - 1).tileType == "number") {
+              emptyAndMineTiles(surroundingTileNo - 1).asInstanceOf[NumberTile].incrementNumber()
             }
         }
       }
       tileNo += 1
     }
-    mineAndEmptyTiles.toArray
+    emptyAndMineTiles.toArray
   }
 
   // Obtain the tile numbers of the surrounding tiles
