@@ -4,19 +4,23 @@ import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 class MineField(val noOfTiles: Int) {
-  var listBufferOfTiles: ListBuffer[Tile] = ListBuffer[Tile]()
+  var listOfTiles: Array[Tile] = Array[Tile]()
+  var noOfMineTiles: Int = 0
 
   // Generate tiles for minefield randomly
-  def generateTiles(): Unit = {
+  def generateTiles(): Array[Tile] = {
+    val tempListBuffer: ListBuffer[Tile] = ListBuffer[Tile]()
     for (_ <- 1 to noOfTiles) {
       if (Random.nextDouble() <= 0.2) {
-        listBufferOfTiles += new MineTile()
+        tempListBuffer += new MineTile()
+        noOfMineTiles += 1
         println("Added mine tile")
       } else {
-        listBufferOfTiles += new EmptyTile()
+        tempListBuffer += new EmptyTile()
         println("Added empty tile")
       }
     }
+    tempListBuffer.toArray
   }
 
   /*  def generateMines(): Unit = {

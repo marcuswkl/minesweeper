@@ -1,7 +1,6 @@
 package com.marcuswkl.minesweeper.view
 
 import com.marcuswkl.minesweeper.model.{EmojiButton, Game}
-import scalafx.Includes._
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
 import scalafx.scene.control.{Button, Label}
@@ -11,6 +10,7 @@ import scalafx.scene.paint.Color
 import scalafxml.core.macros.sfxml
 
 import java.util.{Timer, TimerTask}
+import javafx.{scene => jfxs}
 
 @sfxml
 class GameController(private val mineCounter: Label, private val timeCounter: Label, private val emojiButton: ImageView,
@@ -27,8 +27,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
   // Create new game instance
   val gameInstance = new Game()
 
-  // Initialise counter values and emoji button emoji
-  mineCounter.text = gameInstance.mineCounter.displayCounterValue()
+  // Initialise time counter text and emoji button emoji
   timeCounter.text = gameInstance.timeCounter.displayCounterValue()
   emojiButton.image = EmojiButton.emojiSmile
 
@@ -37,12 +36,16 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     tile12, tile13, tile14, tile15, tile16, tile17, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25)
 
   // Generate tiles for minefield
-  gameInstance.mineField.generateTiles()
+  gameInstance.mineField.listOfTiles = gameInstance.mineField.generateTiles()
+
+  // Initialise mine counter text
+  gameInstance.mineCounter.counterValue = gameInstance.mineField.noOfMineTiles
+  mineCounter.text = gameInstance.mineCounter.displayCounterValue()
 
   // Assign the symbol of the generated tile to the corresponding tile button text
   var tileCounter = 0
   for (tileButton <- tileButtons) {
-    tileButton.text = gameInstance.mineField.listBufferOfTiles(tileCounter).symbol
+    tileButton.text = gameInstance.mineField.listOfTiles(tileCounter).symbol
     // Hide the text after assigning the symbol
     tileButton.textFill = Color.Transparent
     // Increase tile counter to move to the next generated tile
@@ -68,15 +71,24 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     timeCounterTimer.schedule(updateCounterTask, 1000, 1000)
   }
 
+  // Handle tile button click
   def handleClick(event: ActionEvent): Unit = {
-    /*val buttonText = event.source.asInstanceOf[jfxs.control.Button].getText
-    if (buttonText == "💣") {
-      println("Bomb exploded!")
-      emojiButton.image = Game.emojiDead
-    } else {
-      println("No bomb found!")
-      emojiButton.image = Game.emojiOpenMouth
-    }*/
+    // Get tile button object
+    val tileButton = event.source.asInstanceOf[jfxs.control.Button]
+    // Get tile button FXId
+    val buttonFXId = tileButton.getId
+    // Get tile number from FXId
+    val tileNo = buttonFXId.substring(4).toInt
+    // Unhide the button text to show the symbol
+    tileButton.setTextFill(Color.Black)
+    // Get the corresponding tile
+    // Tile number decremented to align with array index
+    val tile = gameInstance.mineField.listOfTiles(tileNo - 1)
+    // Execute corresponding tile click method
+    tile.leftClick()
+    // Update emoji button based on corresponding tile type
+    gameInstance.emojiButton.updateEmoji(tile.tileType)
+    emojiButton.image = gameInstance.emojiButton.emoji
   }
 
   //  generateMines()

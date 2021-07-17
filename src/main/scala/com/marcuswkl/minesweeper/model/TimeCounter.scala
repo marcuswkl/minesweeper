@@ -1,7 +1,5 @@
 package com.marcuswkl.minesweeper.model
 
-import java.util.{Timer, TimerTask}
-
 class TimeCounter(var counterValue: Int = 0) extends Counter("time") {
   override def updateCounter(): Unit = {
     counterValue += 1

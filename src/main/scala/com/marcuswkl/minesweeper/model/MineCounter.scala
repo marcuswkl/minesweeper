@@ -1,6 +1,6 @@
 package com.marcuswkl.minesweeper.model
 
-class MineCounter(var counterValue: Int) extends Counter("mine") {
+class MineCounter(var counterValue: Int = 0) extends Counter("mine") {
   override def updateCounter(): Unit = {
     counterValue -= 1
     // TODO Update when flag marker placed

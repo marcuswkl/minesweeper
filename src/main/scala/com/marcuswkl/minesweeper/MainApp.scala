@@ -1,11 +1,11 @@
 package com.marcuswkl.minesweeper
 
 import javafx.scene.control.SplitPane
+import javafx.scene.layout.{AnchorPane, BorderPane}
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
-import javafx.scene.layout.{AnchorPane, BorderPane}
 import scalafx.scene.image.Image
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
