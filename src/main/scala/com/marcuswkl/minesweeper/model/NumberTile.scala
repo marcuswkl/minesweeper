@@ -1,8 +1,12 @@
 package com.marcuswkl.minesweeper.model
 
-class NumberTile(val symbol: String = "1") extends Tile("number") {
+class NumberTile(var symbol: String = "1") extends Tile("number") {
+  var numberOfMines = 1
   override def leftClick(): Unit = {
-    isLeftClicked = true
-    println("Number tile!")
+  }
+
+  def incrementNumber(): Unit = {
+    numberOfMines += 1
+    symbol = numberOfMines.toString
   }
 }

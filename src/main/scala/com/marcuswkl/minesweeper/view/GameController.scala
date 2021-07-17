@@ -39,7 +39,6 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
   // Generate tiles for minefield
   gameInstance.mineField.listOfTiles =
     gameInstance.mineField.generateNumberTiles(gameInstance.mineField.generateMineAndEmptyTiles())
-  println(gameInstance.mineField.listOfTiles.mkString("Array(", ", ", ")"))
 
   // Initialise mine counter text
   gameInstance.mineCounter.counterValue = gameInstance.mineField.noOfMineTiles

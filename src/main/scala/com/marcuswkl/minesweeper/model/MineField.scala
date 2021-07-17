@@ -30,9 +30,13 @@ class MineField(val noOfTiles: Int) {
         // Obtain the tile numbers of the surrounding tiles
         val surroundingTilesNo = obtainSurroundingTilesNo(tileNo)
         for (surroundingTileNo <- surroundingTilesNo) {
-            // Replace the tile with a danger tile if it is an empty tile
+            // Replace the tile with a number tile if it is an empty tile
             if (mineAndEmptyTiles(surroundingTileNo - 1).tileType == "empty") {
               mineAndEmptyTiles(surroundingTileNo - 1) = new NumberTile()
+            }
+            // Increment the number of the tile if it is a number tile
+            else if (mineAndEmptyTiles(surroundingTileNo - 1).tileType == "number") {
+              mineAndEmptyTiles(surroundingTileNo - 1).asInstanceOf[NumberTile].incrementNumber()
             }
         }
       }
