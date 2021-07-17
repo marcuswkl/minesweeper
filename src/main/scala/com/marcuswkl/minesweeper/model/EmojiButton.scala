@@ -5,7 +5,9 @@ import scalafx.scene.image.Image
 class EmojiButton(var emoji: Image) {
   // Update emoji when user clicks a tile
   def updateEmoji(tileType: String): Unit = {
-    if (tileType == "empty" || tileType == "number") {
+    if (tileType == "empty") {
+      emoji = EmojiButton.emojiSmile
+    } else if (tileType == "number") {
       emoji = EmojiButton.emojiOpenMouth
     } else {
       emoji = EmojiButton.emojiDead
