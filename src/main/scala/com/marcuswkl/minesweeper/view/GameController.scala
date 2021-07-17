@@ -1,9 +1,10 @@
 package com.marcuswkl.minesweeper.view
 
-import com.marcuswkl.minesweeper.model.{EmojiButton, Game}
+import com.marcuswkl.minesweeper.MainApp
+import com.marcuswkl.minesweeper.model.{EmojiButton, Game, Tile}
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
-import scalafx.scene.control.{Button, Label}
+import scalafx.scene.control.{Alert, Button, Label}
 import scalafx.scene.image.ImageView
 import scalafx.scene.layout.TilePane
 import scalafx.scene.paint.Color
@@ -11,6 +12,7 @@ import scalafxml.core.macros.sfxml
 
 import java.util.{Timer, TimerTask}
 import javafx.{scene => jfxs}
+import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.effect.InnerShadow
 
 @sfxml
@@ -38,7 +40,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
 
   // Generate tiles for minefield
   gameInstance.mineField.listOfTiles =
-    gameInstance.mineField.generateNumberTiles(gameInstance.mineField.generateMineAndEmptyTiles())
+    gameInstance.mineField.generateNumberTiles(gameInstance.mineField.generateEmptyAndMineTiles())
 
   // Initialise mine counter text
   gameInstance.mineCounter.counterValue = gameInstance.mineField.noOfMineTiles
@@ -49,7 +51,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
   for (tileButton <- tileButtons) {
     tileButton.text = gameInstance.mineField.listOfTiles(tileCounter).symbol
     // Hide the text after assigning the symbol
-    tileButton.textFill = Color.Transparent
+    tileButton.textFill = Color.Black
     // Increase tile counter to move to the next generated tile
     tileCounter += 1
   }
@@ -73,6 +75,57 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     timeCounterTimer.schedule(updateCounterTask, 1000, 1000)
   }
 
+  // Checks the status of the minefield to determine if the user wins or loses
+  def checkStatus(listOfTiles: Array[Tile]): Unit = {
+    var clickedEmptyTiles = 0
+    var clickedNumberTiles = 0
+    var clickedMineTiles = 0
+
+    for (tile <- listOfTiles) {
+      // Count the number of clicked empty tiles
+      if (tile.tileType == "empty" && tile.isLeftClicked) {
+        clickedEmptyTiles += 1
+      }
+      // Count the number of clicked number tiles
+      else if (tile.tileType == "number" && tile.isLeftClicked) {
+        clickedNumberTiles += 1
+      }
+      // Count the number of clicked mine tiles
+      else if (tile.tileType == "mine" && tile.isLeftClicked) {
+        clickedMineTiles += 1
+      }
+    }
+
+    // If the user wins the game
+    if (clickedEmptyTiles == gameInstance.mineField.noOfEmptyTiles &&
+      clickedNumberTiles == gameInstance.mineField.noOfNumberTiles) {
+      winGame()
+    }
+
+    // If the user loses the game
+    if (clickedMineTiles >= 1) {
+      loseGame()
+    }
+  }
+
+  def winGame(): Unit = {
+    new Alert(AlertType.Information){
+      initOwner(MainApp.stage)
+      title       = "Minesweeper"
+      headerText  = "Congratulations"
+      contentText = "You win the game!"
+    }.showAndWait()
+  }
+
+  def loseGame(): Unit = {
+    new Alert(AlertType.Information){
+      initOwner(MainApp.stage)
+      title       = "Minesweeper"
+      headerText  = "Condolences"
+      contentText = "You lose the game!"
+    }.showAndWait()
+  }
+
   // Handle tile button click
   def handleClick(event: ActionEvent): Unit = {
     // Get tile button object
@@ -93,8 +146,10 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     // Update emoji button based on corresponding tile type
     gameInstance.emojiButton.updateEmoji(tile.tileType)
     emojiButton.image = gameInstance.emojiButton.emoji
+    // Check game status
+    checkStatus(gameInstance.mineField.listOfTiles)
   }
 
-  //  generateMines()
+  // Start the time counter
   startTimeCounter()
 }
