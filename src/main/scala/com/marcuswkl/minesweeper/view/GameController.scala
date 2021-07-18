@@ -115,6 +115,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
       headerText  = "Congratulations"
       contentText = "You win the game!"
     }.showAndWait()
+    MainApp.showMenu()
   }
 
   def loseGame(): Unit = {
@@ -124,6 +125,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
       headerText  = "Condolences"
       contentText = "You lose the game!"
     }.showAndWait()
+    MainApp.showMenu()
   }
 
   // Handle tile button click
