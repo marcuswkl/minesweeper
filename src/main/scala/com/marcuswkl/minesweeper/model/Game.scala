@@ -9,6 +9,8 @@ class Game() {
   var timeCounter: TimeCounter = new TimeCounter()
   var emojiButton: EmojiButton = new EmojiButton(EmojiButton.emojiSmile)
   var mineField: MineField = new MineField(25)
+  var flagMarker: FlagMarker = new FlagMarker()
+  var questionMarkMarker: QuestionMarkMarker = new QuestionMarkMarker()
   var mode: String = "tile"
 
   // Checks the status of the minefield to determine if the user wins or loses
