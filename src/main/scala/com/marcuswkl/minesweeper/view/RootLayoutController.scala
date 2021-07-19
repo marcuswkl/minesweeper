@@ -13,6 +13,11 @@ class RootLayoutController() {
     Platform.exit()
   }
 
+  // Create a new game
+  def handleNew() {
+    MainApp.showGame()
+  }
+
   // Display about dialog
   def handleAbout() {
     new Alert(AlertType.Information){
