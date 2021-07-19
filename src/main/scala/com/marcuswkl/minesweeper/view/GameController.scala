@@ -128,6 +128,18 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     MainApp.showMenu()
   }
 
+  def handleOpenTile(): Unit = {
+    gameInstance.mode = "tile"
+  }
+
+  def handlePlaceFlag(): Unit = {
+    gameInstance.mode = "flag"
+  }
+
+  def handlePlaceQuestionMark(): Unit = {
+    gameInstance.mode = "question mark"
+  }
+
   // Handle tile button click
   def handleClick(event: ActionEvent): Unit = {
     // Get tile button object
