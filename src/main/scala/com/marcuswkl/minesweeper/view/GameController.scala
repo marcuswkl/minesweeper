@@ -76,20 +76,28 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     val buttonFXId = tileButton.getId
     // Get tile number from FXId
     val tileNo = buttonFXId.substring(4).toInt
-    // Unhide the button text to show the symbol
-    tileButton.setTextFill(Color.Black)
-    // Change the look of the button to indicate clicked
-    tileButton.setEffect(new InnerShadow())
-    // Get the corresponding tile
-    // Tile number decremented to align with array index
-    val tile = gameInstance.mineField.listOfTiles(tileNo - 1)
-    // Execute corresponding tile click method
-    tile.tileClick()
-    // Update emoji button based on corresponding tile type
-    gameInstance.emojiButton.updateEmoji(tile.tileType)
-    emojiButton.image = gameInstance.emojiButton.emoji
-    // Check game status
-    gameInstance.checkStatus(gameInstance.mineField.listOfTiles)
+
+    // Execute the corresponding click method based on the game mode
+    if (gameInstance.mode == "tile") {
+      // Unhide the button text to show the symbol
+      tileButton.setTextFill(Color.Black)
+      // Change the look of the button to indicate clicked
+      tileButton.setEffect(new InnerShadow())
+      // Get the corresponding tile
+      // Tile number decremented to align with array index
+      val tile = gameInstance.mineField.listOfTiles(tileNo - 1)
+      // Execute corresponding tile click method
+      tile.tileClick()
+      // Update emoji button based on corresponding tile type
+      gameInstance.emojiButton.updateEmoji(tile.tileType)
+      emojiButton.image = gameInstance.emojiButton.emoji
+      // Check game status
+      gameInstance.checkStatus(gameInstance.mineField.listOfTiles)
+    } else if (gameInstance.mode == "flag") {
+      println("perform flag click")
+    } else {
+      println("perform question mark click")
+    }
   }
 
   // Start the time counter
