@@ -39,6 +39,7 @@ object MainApp extends JFXApp {
     loader.load(resource);
     val roots = loader.getRoot[AnchorPane]
     this.roots.setCenter(roots)
+    gameStarted = false
   }
 
   // Display the game
