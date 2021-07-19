@@ -1,5 +1,10 @@
 package com.marcuswkl.minesweeper.model
 
+import scalafx.application.Platform
+import scalafx.scene.control.Label
+
+import java.util.{Timer, TimerTask}
+
 class TimeCounter(var counterValue: Int = 0) extends Counter("time") {
   override def updateCounter(): Unit = {
     counterValue += 1
@@ -19,5 +24,24 @@ class TimeCounter(var counterValue: Int = 0) extends Counter("time") {
     else {
       counterValue.toString
     }
+  }
+
+  // Start updating the counter each second
+  def startTimeCounter(counterLabel: Label): Unit = {
+    // Create a new thread for update execution
+    val updateCounterRunnable = new Runnable() {
+      def run(): Unit = {
+        updateCounter()
+        counterLabel.text = displayCounterValue()
+      }
+    }
+    // Create a timer and schedule the update thread
+    val timeCounterTimer = new Timer()
+    val updateCounterTask = new TimerTask {
+      override def run(): Unit = {
+        Platform.runLater(updateCounterRunnable)
+      }
+    }
+    timeCounterTimer.schedule(updateCounterTask, 1000, 1000)
   }
 }

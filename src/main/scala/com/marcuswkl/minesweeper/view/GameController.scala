@@ -56,78 +56,6 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     tileCounter += 1
   }
 
-  // Start updating the counter each second
-  def startTimeCounter(): Unit = {
-    // Create a new thread for update execution
-    val updateCounterRunnable = new Runnable() {
-      def run(): Unit = {
-        gameInstance.timeCounter.updateCounter()
-        timeCounter.text = gameInstance.timeCounter.displayCounterValue()
-      }
-    }
-    // Create a timer and schedule the update thread
-    val timeCounterTimer = new Timer()
-    val updateCounterTask = new TimerTask {
-      override def run(): Unit = {
-        Platform.runLater(updateCounterRunnable)
-      }
-    }
-    timeCounterTimer.schedule(updateCounterTask, 1000, 1000)
-  }
-
-  // Checks the status of the minefield to determine if the user wins or loses
-  def checkStatus(listOfTiles: Array[Tile]): Unit = {
-    var clickedEmptyTiles = 0
-    var clickedNumberTiles = 0
-    var clickedMineTiles = 0
-
-    for (tile <- listOfTiles) {
-      // Count the number of clicked empty tiles
-      if (tile.tileType == "empty" && tile.isLeftClicked) {
-        clickedEmptyTiles += 1
-      }
-      // Count the number of clicked number tiles
-      else if (tile.tileType == "number" && tile.isLeftClicked) {
-        clickedNumberTiles += 1
-      }
-      // Count the number of clicked mine tiles
-      else if (tile.tileType == "mine" && tile.isLeftClicked) {
-        clickedMineTiles += 1
-      }
-    }
-
-    // If the user wins the game
-    if (clickedEmptyTiles == gameInstance.mineField.noOfEmptyTiles &&
-      clickedNumberTiles == gameInstance.mineField.noOfNumberTiles) {
-      winGame()
-    }
-
-    // If the user loses the game
-    if (clickedMineTiles >= 1) {
-      loseGame()
-    }
-  }
-
-  def winGame(): Unit = {
-    new Alert(AlertType.Information){
-      initOwner(MainApp.stage)
-      title       = "Minesweeper"
-      headerText  = "Congratulations"
-      contentText = "You win the game!"
-    }.showAndWait()
-    MainApp.showMenu()
-  }
-
-  def loseGame(): Unit = {
-    new Alert(AlertType.Information){
-      initOwner(MainApp.stage)
-      title       = "Minesweeper"
-      headerText  = "Condolences"
-      contentText = "You lose the game!"
-    }.showAndWait()
-    MainApp.showMenu()
-  }
-
   def handleOpenTile(): Unit = {
     gameInstance.mode = "tile"
   }
@@ -156,14 +84,14 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     // Tile number decremented to align with array index
     val tile = gameInstance.mineField.listOfTiles(tileNo - 1)
     // Execute corresponding tile click method
-    tile.leftClick()
+    tile.tileClick()
     // Update emoji button based on corresponding tile type
     gameInstance.emojiButton.updateEmoji(tile.tileType)
     emojiButton.image = gameInstance.emojiButton.emoji
     // Check game status
-    checkStatus(gameInstance.mineField.listOfTiles)
+    gameInstance.checkStatus(gameInstance.mineField.listOfTiles)
   }
 
   // Start the time counter
-  startTimeCounter()
+  gameInstance.timeCounter.startTimeCounter(timeCounter)
 }
