@@ -1,5 +1,6 @@
 package com.marcuswkl.minesweeper
 
+import com.marcuswkl.minesweeper.view.GameController
 import javafx.scene.control.SplitPane
 import javafx.scene.layout.{AnchorPane, BorderPane}
 import scalafx.Includes._
@@ -18,6 +19,9 @@ object MainApp extends JFXApp {
   loader.load(rootResource)
   // Retrieve the root component BorderPane from the FXML
   val roots = loader.getRoot[BorderPane]
+
+  var gameStarted = false
+  var gameControllerOption: Option[GameController#Controller] = None
 
   // Initialise stage
   stage = new PrimaryStage {
@@ -44,6 +48,8 @@ object MainApp extends JFXApp {
     loader.load(resource);
     val roots = loader.getRoot[SplitPane]
     this.roots.setCenter(roots)
+    gameControllerOption = Option(loader.getController[GameController#Controller])
+    gameStarted = true
   }
 
   // Display the menu when the app starts

@@ -9,17 +9,63 @@ import scalafxml.core.macros.sfxml
 @sfxml
 class RootLayoutController() {
   // Exit the game
-  def handleExit() {
+  def handleExit(): Unit = {
     Platform.exit()
   }
 
   // Create a new game
-  def handleNew() {
+  def handleNew(): Unit = {
     MainApp.showGame()
   }
 
+  // Show dialog to inform the user that the game is not started
+  def showGameNotStartedDialog(): Unit = {
+    new Alert(AlertType.Error){
+      initOwner(MainApp.stage)
+      title       = "Minesweeper"
+      headerText  = "Game Not Started"
+      contentText = "Please start the game."
+    }.showAndWait()
+  }
+
+  // Change mode to open tile
+  def handleTile(): Unit = {
+    if (MainApp.gameStarted) {
+      MainApp.gameControllerOption match {
+        case Some(gameController) => gameController.handleOpenTile()
+        case None => throw new Exception("Game controller not initialised.")
+      }
+    } else {
+      showGameNotStartedDialog()
+    }
+  }
+
+  // Change mode to place flag
+  def handleFlag(): Unit = {
+    if (MainApp.gameStarted) {
+      MainApp.gameControllerOption match {
+        case Some(gameController) => gameController.handlePlaceFlag()
+        case None => throw new Exception("Game controller not initialised.")
+      }
+    } else {
+      showGameNotStartedDialog()
+    }
+  }
+
+  // Change mode to place question mark
+  def handleQuestionMark(): Unit = {
+    if (MainApp.gameStarted) {
+      MainApp.gameControllerOption match {
+        case Some(gameController) => gameController.handlePlaceQuestionMark()
+        case None => throw new Exception("Game controller not initialised.")
+      }
+    } else {
+      showGameNotStartedDialog()
+    }
+  }
+
   // Display about dialog
-  def handleAbout() {
+  def handleAbout(): Unit = {
     new Alert(AlertType.Information){
       initOwner(MainApp.stage)
       title       = "Minesweeper"
