@@ -23,6 +23,25 @@
                   </MenuItem>
                     </items>
                 </Menu>
+            <Menu text="_Option">
+               <items>
+                  <MenuItem onAction="#handleOpenTile" text="Open _Tile">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="T" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem onAction="#handlePlaceFlag" text="Place _Flag">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="F" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem onAction="#handlePlaceQuestionMark" text="Place _Question Mark">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="Q" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+               </items>
+            </Menu>
                 <Menu text="_Help">
                     <items>
                         <MenuItem onAction="#handleAbout" text="_About">
