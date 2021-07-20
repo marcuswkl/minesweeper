@@ -1,7 +1,7 @@
 package com.marcuswkl.minesweeper.view
 
 import com.marcuswkl.minesweeper.MainApp
-import com.marcuswkl.minesweeper.model.{EmojiButton, Game, Tile}
+import com.marcuswkl.minesweeper.model.{EmojiImage, Game, Tile}
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
 import scalafx.scene.control.{Alert, Button, Label}
@@ -16,7 +16,7 @@ import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.effect.InnerShadow
 
 @sfxml
-class GameController(private val mineCounter: Label, private val timeCounter: Label, private val emojiButton: ImageView,
+class GameController(private val mineCounter: Label, private val timeCounter: Label, private val emojiImage: ImageView,
                      private val minefield: TilePane, private val tile1: Button, private val tile2: Button,
                      private val tile3: Button, private val tile4: Button, private val tile5: Button,
                      private val tile6: Button, private val tile7: Button, private val tile8: Button,
@@ -32,7 +32,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
 
   // Initialise time counter text and emoji button emoji
   timeCounter.text = gameInstance.timeCounter.displayCounterValue()
-  emojiButton.image = EmojiButton.emojiSmile
+  emojiImage.image = EmojiImage.emojiSmile
 
   // Insert tile buttons into array for easier usage
   val tileButtons: List[Button] = List(tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9, tile10, tile11,
@@ -61,19 +61,19 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
   def changeTileMode(): Unit = {
     gameInstance.changeMode("tile")
     // Update the emoji button image
-    emojiButton.image = gameInstance.emojiButton.emoji
+    emojiImage.image = gameInstance.emojiImage.emoji
   }
   // Change mode to place flag
   def changeFlagMode(): Unit = {
     gameInstance.changeMode("flag")
     // Update the emoji button image
-    emojiButton.image = gameInstance.emojiButton.emoji
+    emojiImage.image = gameInstance.emojiImage.emoji
   }
   // Change mode to place question mark
   def changeQuestionMarkMode(): Unit = {
     gameInstance.changeMode("question mark")
     // Update the emoji button image
-    emojiButton.image = gameInstance.emojiButton.emoji
+    emojiImage.image = gameInstance.emojiImage.emoji
   }
 
   // Handle tile button click
@@ -88,7 +88,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     // Execute the corresponding mode action based on the selected mode
     gameInstance.executeModeAction(tileButton, tile)
     // Update the emoji button image
-    emojiButton.image = gameInstance.emojiButton.emoji
+    emojiImage.image = gameInstance.emojiImage.emoji
     // Update the mine counter value
     mineCounter.text = gameInstance.mineCounter.displayCounterValue()
   }

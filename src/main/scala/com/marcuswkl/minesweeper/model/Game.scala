@@ -9,7 +9,7 @@ class Game() {
   // Initialise the game
   var mineCounter: MineCounter = new MineCounter()
   var timeCounter: TimeCounter = new TimeCounter()
-  var emojiButton: EmojiButton = new EmojiButton(EmojiButton.emojiSmile)
+  var emojiImage: EmojiImage = new EmojiImage(EmojiImage.emojiSmile)
   var mineField: MineField = new MineField(25)
   var flagMarker: FlagMarker = new FlagMarker()
   var questionMarkMarker: QuestionMarkMarker = new QuestionMarkMarker()
@@ -17,7 +17,7 @@ class Game() {
 
   def changeMode(newMode: String): Unit = {
     mode = newMode
-    emojiButton.updateModeEmoji(newMode)
+    emojiImage.updateModeEmoji(newMode)
   }
 
   // Execute the corresponding action based on the selected mode
@@ -42,7 +42,7 @@ class Game() {
       // Open the tile
       tile.openTile(tileButton)
       // Update emoji button based on corresponding tile type
-      emojiButton.updateTileModeEmoji(tile.tileType)
+      emojiImage.updateTileModeEmoji(tile.tileType)
       // Check game status
       checkStatus(mineField.listOfTiles)
     }

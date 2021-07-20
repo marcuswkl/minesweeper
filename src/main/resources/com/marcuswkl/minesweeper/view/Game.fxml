@@ -32,7 +32,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <ImageView fx:id="emojiButton" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <ImageView fx:id="emojiImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
       <TilePane fx:id="mineField" alignment="CENTER" hgap="1.0" prefHeight="200.0" prefTileHeight="50.0" prefTileWidth="50.0" prefWidth="200.0" vgap="1.0">
