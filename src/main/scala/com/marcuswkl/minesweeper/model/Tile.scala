@@ -1,11 +1,37 @@
 package com.marcuswkl.minesweeper.model
 
+import javafx.scene.control.Button
+import scalafx.scene.effect.InnerShadow
+import scalafx.scene.paint.Color
+
 abstract class Tile(val tileType: String) {
-  var isTileClicked = false
+  var isOpened = false
   var isFlagMarked = false
   var isQuestionMarked = false
   var symbol: String
 
-  // Different tiles have different left click behaviour
-  def tileClick(): Unit
+  // All tiles open the same way
+  def openTile(tileButton: Button): Unit = {
+    // Unhide the button text to show the symbol
+    tileButton.setTextFill(Color.Black)
+    // Change the look of the button to indicate clicked
+    tileButton.setEffect(new InnerShadow())
+    // Update the tile status as opened
+    isOpened = true
+  }
+
+  // All tiles remove mark the same way
+  def removeMark(tileButton: Button): Unit = {
+    // Hide the button text before replacing the marker symbol
+    tileButton.setTextFill(Color.Transparent)
+    // Replace the marker symbol with the corresponding tile symbol
+    tileButton.setText(symbol)
+    // Update the tile status as not marked
+    if (isFlagMarked) {
+      isFlagMarked = false
+    }
+    if (isQuestionMarked) {
+      isQuestionMarked = false
+    }
+  }
 }
