@@ -21,15 +21,15 @@ class Game() {
 
     for (tile <- listOfTiles) {
       // Count the number of empty tile clicks
-      if (tile.tileType == "empty" && tile.isTileClicked) {
+      if (tile.tileType == "empty" && tile.isOpened) {
         emptyTileClicks += 1
       }
       // Count the number of number tile clicks
-      else if (tile.tileType == "number" && tile.isTileClicked) {
+      else if (tile.tileType == "number" && tile.isOpened) {
         numberTileClicks += 1
       }
       // Count the number of mine tile clicks
-      else if (tile.tileType == "mine" && tile.isTileClicked) {
+      else if (tile.tileType == "mine" && tile.isOpened) {
         mineTileClicks += 1
       }
     }
