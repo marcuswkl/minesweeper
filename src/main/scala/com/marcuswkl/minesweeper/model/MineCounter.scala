@@ -1,11 +1,6 @@
 package com.marcuswkl.minesweeper.model
 
 class MineCounter(var counterValue: Int = 0) extends Counter("mine") {
-  override def updateCounter(): Unit = {
-    counterValue -= 1
-    // TODO Update when flag marker placed
-  }
-
   // Display positive and negative digits using three places format (nnn)
   override def displayCounterValue(): String = {
     // Display positive single digit with two leading zeroes
