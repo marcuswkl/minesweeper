@@ -10,10 +10,7 @@ import scalafx.scene.layout.TilePane
 import scalafx.scene.paint.Color
 import scalafxml.core.macros.sfxml
 
-import java.util.{Timer, TimerTask}
 import javafx.{scene => jfxs}
-import scalafx.scene.control.Alert.AlertType
-import scalafx.scene.effect.InnerShadow
 
 @sfxml
 class GameController(private val mineCounter: Label, private val timeCounter: Label, private val emojiImage: ImageView,
@@ -34,7 +31,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
   timeCounter.text = gameInstance.timeCounter.displayCounterValue()
   emojiImage.image = EmojiImage.emojiSmile
 
-  // Insert tile buttons into array for easier usage
+  // Insert tile buttons into list for easier usage
   val tileButtons: List[Button] = List(tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9, tile10, tile11,
     tile12, tile13, tile14, tile15, tile16, tile17, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25)
 
@@ -91,6 +88,9 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     emojiImage.image = gameInstance.emojiImage.emoji
     // Update the mine counter value
     mineCounter.text = gameInstance.mineCounter.displayCounterValue()
+    if(gameInstance.gameEnded) {
+      gameInstance.revealTiles(tileButtons, gameInstance.mineField.listOfTiles)
+    }
   }
 
   // Start the time counter

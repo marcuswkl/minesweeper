@@ -2,6 +2,7 @@ package com.marcuswkl.minesweeper.model
 
 import com.marcuswkl.minesweeper.MainApp
 import javafx.scene.control.Button
+import scalafx.scene.{control => sfxsc}
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
 
@@ -14,6 +15,7 @@ class Game() {
   var flagMarker: FlagMarker = new FlagMarker()
   var questionMarkMarker: QuestionMarkMarker = new QuestionMarkMarker()
   var mode: String = "tile"
+  var gameEnded = false
 
   def changeMode(newMode: String): Unit = {
     mode = newMode
@@ -37,20 +39,23 @@ class Game() {
   }
 
   def performTileAction(tileButton: Button, tile: Tile): Unit = {
-    // If the tile is not marked
-    if (!tile.isFlagMarked && !tile.isQuestionMarked) {
-      // Open the tile
-      tile.openTile(tileButton)
-      // Update emoji button based on corresponding tile type
-      emojiImage.updateTileModeEmoji(tile.tileType)
-      // Check game status
-      checkStatus(mineField.listOfTiles)
-    }
-    // If the tile is marked
-    else {
-      val markType = tile.removeMark(tileButton)
-      if (markType == "flag") {
-        mineCounter.incrementCounter()
+    // If the tile is not opened
+    if (!tile.isOpened) {
+      // If the tile is not marked
+      if (!tile.isFlagMarked && !tile.isQuestionMarked) {
+        // Open the tile
+        tile.openTile(tileButton)
+        // Update emoji button based on corresponding tile type
+        emojiImage.updateTileModeEmoji(tile.tileType)
+        // Check game status
+        checkStatus(mineField.listOfTiles)
+      }
+      // If the tile is marked
+      else {
+        val markType = tile.removeMark(tileButton)
+        if (markType == "flag") {
+          mineCounter.incrementCounter()
+        }
       }
     }
   }
@@ -119,11 +124,13 @@ class Game() {
     // If the user wins the game
     if (emptyTileClicks == mineField.noOfEmptyTiles &&
       numberTileClicks == mineField.noOfNumberTiles) {
+      gameEnded = true
       winGame()
     }
 
     // If the user loses the game
     if (mineTileClicks >= 1) {
+      gameEnded = true
       loseGame()
     }
   }
@@ -144,5 +151,25 @@ class Game() {
       headerText  = "Condolences"
       contentText = "You lose the game!"
     }.showAndWait()
+  }
+
+  // Reveal all the tiles after the game ends
+  def revealTiles(tileButtons: List[sfxsc.Button], tiles: Array[Tile]): Unit = {
+    var tileButtonCounter = 0
+    for (tile <- tiles) {
+      // If the tile is not opened
+      if (!tile.isOpened) {
+        // If the tile is not marked
+        if (!tile.isFlagMarked && !tile.isQuestionMarked) {
+          tile.openTile(tileButtons(tileButtonCounter))
+        }
+        // If the tile is marked
+        else {
+          tile.removeMark(tileButtons(tileButtonCounter))
+          tile.openTile(tileButtons(tileButtonCounter))
+        }
+      }
+      tileButtonCounter += 1
+    }
   }
 }
