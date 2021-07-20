@@ -30,10 +30,10 @@ class EmojiImage(var emoji: Image) {
 // Companion object to store emoji images
 object EmojiImage {
   // Mode emojis
-  val emojiSmile = new Image(getClass.getResourceAsStream("../images/emoji-smile.png"))
-  val emojiFlag = new Image(getClass.getResourceAsStream("../images/emoji-flag.png"))
-  val emojiQuestionMark = new Image(getClass.getResourceAsStream("../images/emoji-question-mark.png"))
+  val emojiSmile = new Image(getClass.getResourceAsStream("/com/marcuswkl/minesweeper/images/emoji-smile.png"))
+  val emojiFlag = new Image(getClass.getResourceAsStream("/com/marcuswkl/minesweeper/images/emoji-flag.png"))
+  val emojiQuestionMark = new Image(getClass.getResourceAsStream("/com/marcuswkl/minesweeper/images/emoji-question-mark.png"))
   // Tile mode emojis
-  val emojiOpenMouth = new Image(getClass.getResourceAsStream("../images/emoji-open-mouth.png"))
-  val emojiDead = new Image(getClass.getResourceAsStream("../images/emoji-dead.png"))
+  val emojiOpenMouth = new Image(getClass.getResourceAsStream("/com/marcuswkl/minesweeper/images/emoji-open-mouth.png"))
+  val emojiDead = new Image(getClass.getResourceAsStream("/com/marcuswkl/minesweeper/images/emoji-dead.png"))
 }
