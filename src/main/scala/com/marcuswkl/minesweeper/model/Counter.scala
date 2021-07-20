@@ -3,8 +3,15 @@ package com.marcuswkl.minesweeper.model
 abstract class Counter(val counterType: String) {
   var counterValue: Int
 
-  // Different counters will update differently
-  def updateCounter(): Unit
+  // All counters will increment in the same way
+  def incrementCounter(): Unit = {
+    counterValue += 1
+  }
+
+  // All counters will decrement in the same way
+  def decrementCounter(): Unit = {
+    counterValue -= 1
+  }
 
   // Different counters will display differently
   def displayCounterValue(): String
