@@ -135,7 +135,6 @@ class Game() {
       headerText  = "Congratulations"
       contentText = "You win the game!"
     }.showAndWait()
-    MainApp.showMenu()
   }
 
   def loseGame(): Unit = {
@@ -145,6 +144,5 @@ class Game() {
       headerText  = "Condolences"
       contentText = "You lose the game!"
     }.showAndWait()
-    MainApp.showMenu()
   }
 }

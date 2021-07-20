@@ -16,6 +16,11 @@
                             <accelerator>
                                 <KeyCodeCombination alt="DOWN" code="N" control="UP" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator></MenuItem>
+                  <MenuItem onAction="#handleMenu" text="Men_u">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="U" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
                   <MenuItem onAction="#handleExit" text="_Exit">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="E" control="UP" meta="UP" shift="UP" shortcut="UP" />

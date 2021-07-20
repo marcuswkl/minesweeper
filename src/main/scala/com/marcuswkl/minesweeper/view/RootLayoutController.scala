@@ -8,14 +8,19 @@ import scalafxml.core.macros.sfxml
 
 @sfxml
 class RootLayoutController() {
-  // Exit the game
-  def handleExit(): Unit = {
-    Platform.exit()
-  }
-
   // Create a new game
   def handleNew(): Unit = {
     MainApp.showGame()
+  }
+
+  // Return to menu
+  def handleMenu(): Unit = {
+    MainApp.showMenu()
+  }
+
+  // Exit the game
+  def handleExit(): Unit = {
+    Platform.exit()
   }
 
   // Show dialog to inform the user that the game is not started
