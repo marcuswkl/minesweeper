@@ -1,10 +1,12 @@
 package com.marcuswkl.minesweeper.model
 
 import com.marcuswkl.minesweeper.MainApp
+import javafx.scene.control.Button
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
 
 class Game() {
+  // Initialise the game
   var mineCounter: MineCounter = new MineCounter()
   var timeCounter: TimeCounter = new TimeCounter()
   var emojiButton: EmojiButton = new EmojiButton(EmojiButton.emojiSmile)
@@ -12,6 +14,74 @@ class Game() {
   var flagMarker: FlagMarker = new FlagMarker()
   var questionMarkMarker: QuestionMarkMarker = new QuestionMarkMarker()
   var mode: String = "tile"
+
+  // Execute the corresponding action based on the selected mode
+  def executeModeAction(tileButton: Button, tile: Tile): Unit = {
+    // If the mode is tile
+    if (mode == "tile") {
+      performTileAction(tileButton, tile)
+    }
+    // If the mode is flag
+    else if (mode == "flag") {
+      performFlagAction(tileButton, tile)
+    }
+    // If the mode is question mark
+    else {
+      performQuestionMarkAction(tileButton, tile)
+    }
+  }
+
+  def performTileAction(tileButton: Button, tile: Tile): Unit = {
+    // If the tile is not marked
+    if (!tile.isFlagMarked && !tile.isQuestionMarked) {
+      // Open the tile
+      tile.openTile(tileButton)
+      // Update emoji button based on corresponding tile type
+      emojiButton.updateEmoji(tile.tileType)
+      // Check game status
+      checkStatus(mineField.listOfTiles)
+    }
+    // If the tile is marked
+    else {
+      tile.removeMark(tileButton)
+    }
+  }
+
+  def performFlagAction(tileButton: Button, tile: Tile): Unit = {
+    // If the tile is not opened
+    if (!tile.isOpened) {
+      // If the tile is not marked
+      if (!tile.isFlagMarked && !tile.isQuestionMarked) {
+        flagMarker.placeMarker(tileButton, tile)
+      }
+      // If the tile is question marked
+      else if (tile.isQuestionMarked) {
+        flagMarker.replaceMarker(tileButton, tile)
+      }
+      // If the tile is flag marked already
+      else {
+        flagMarker.removeMarker(tileButton, tile)
+      }
+    }
+  }
+
+  def performQuestionMarkAction(tileButton: Button, tile: Tile): Unit = {
+    // If the tile is not opened
+    if (!tile.isOpened) {
+      // If the tile is not marked
+      if (!tile.isFlagMarked && !tile.isQuestionMarked) {
+        questionMarkMarker.placeMarker(tileButton, tile)
+      }
+      // If the tile is flag marked
+      else if (tile.isFlagMarked) {
+        questionMarkMarker.replaceMarker(tileButton, tile)
+      }
+      // If the tile is question marked already
+      else {
+        questionMarkMarker.removeMarker(tileButton, tile)
+      }
+    }
+  }
 
   // Checks the status of the minefield to determine if the user wins or loses
   def checkStatus(listOfTiles: Array[Tile]): Unit = {

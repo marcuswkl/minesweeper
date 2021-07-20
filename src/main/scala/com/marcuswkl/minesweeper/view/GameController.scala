@@ -56,18 +56,17 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     tileCounter += 1
   }
 
+  // Mode change methods for menu item mode handlers
   // Change mode to open tile
-  def handleOpenTile(): Unit = {
+  def changeTileMode(): Unit = {
     gameInstance.mode = "tile"
   }
-
   // Change mode to place flag
-  def handlePlaceFlag(): Unit = {
+  def changeFlagMode(): Unit = {
     gameInstance.mode = "flag"
   }
-
   // Change mode to place question mark
-  def handlePlaceQuestionMark(): Unit = {
+  def changeQuestionMarkMode(): Unit = {
     gameInstance.mode = "question mark"
   }
 
@@ -80,60 +79,10 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     // Get the corresponding tile
     // Tile number decremented to align with array index
     val tile = gameInstance.mineField.listOfTiles(tileNo - 1)
-
-    // Execute the corresponding click method based on the mode
-    // If the mode is open tile
-    if (gameInstance.mode == "tile") {
-      // If the tile is not marked
-      if (!tile.isFlagMarked && !tile.isQuestionMarked) {
-        // Open the tile
-        tile.openTile(tileButton)
-        // Update emoji button based on corresponding tile type
-        gameInstance.emojiButton.updateEmoji(tile.tileType, emojiButton)
-        // Check game status
-        gameInstance.checkStatus(gameInstance.mineField.listOfTiles)
-      }
-      // If the tile is marked
-      else {
-        tile.removeMark(tileButton)
-      }
-    }
-    // If the mode is place flag
-    else if (gameInstance.mode == "flag") {
-      // If the tile is not opened
-      if (!tile.isOpened) {
-        // If the tile is not marked
-        if (!tile.isFlagMarked && !tile.isQuestionMarked) {
-          gameInstance.flagMarker.placeMarker(tileButton, tile)
-        }
-        // If the tile is question marked
-        else if (tile.isQuestionMarked) {
-          gameInstance.flagMarker.replaceMarker(tileButton, tile)
-        }
-        // If the tile is flag marked already
-        else {
-          gameInstance.flagMarker.removeMarker(tileButton, tile)
-        }
-      }
-    }
-    // If the mode is place question mark
-    else {
-      // If the tile is not opened
-      if (!tile.isOpened) {
-        // If the tile is not marked
-        if (!tile.isFlagMarked && !tile.isQuestionMarked) {
-          gameInstance.questionMarkMarker.placeMarker(tileButton, tile)
-        }
-        // If the tile is flag marked
-        else if (tile.isFlagMarked) {
-          gameInstance.questionMarkMarker.replaceMarker(tileButton, tile)
-        }
-        // If the tile is question marked already
-        else {
-          gameInstance.questionMarkMarker.removeMarker(tileButton, tile)
-        }
-      }
-    }
+    // Execute the corresponding mode action based on the selected mode
+    gameInstance.executeModeAction(tileButton, tile)
+    // Update the emoji button image
+    emojiButton.image = gameInstance.emojiButton.emoji
   }
 
   // Start the time counter
