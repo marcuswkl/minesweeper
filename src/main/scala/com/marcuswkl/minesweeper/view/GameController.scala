@@ -88,8 +88,12 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     emojiImage.image = gameInstance.emojiImage.emoji
     // Update the mine counter value
     mineCounter.text = gameInstance.mineCounter.displayCounterValue()
+    // If the game ends
     if(gameInstance.gameEnded) {
+      // Reveal all of the tiles
       gameInstance.revealTiles(tileButtons, gameInstance.mineField.listOfTiles)
+      // Hide the time counter
+      gameInstance.timeCounter.hideTimeCounter(timeCounter)
     }
   }
 

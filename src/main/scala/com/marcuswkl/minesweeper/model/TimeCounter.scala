@@ -40,4 +40,8 @@ class TimeCounter(var counterValue: Int = 0) extends Counter("time") {
     }
     timeCounterTimer.schedule(updateCounterTask, 1000, 1000)
   }
+
+  def hideTimeCounter(counterLabel: Label): Unit = {
+    counterLabel.visible = false
+  }
 }
