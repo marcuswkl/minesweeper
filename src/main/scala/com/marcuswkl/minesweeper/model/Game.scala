@@ -2,9 +2,9 @@ package com.marcuswkl.minesweeper.model
 
 import com.marcuswkl.minesweeper.MainApp
 import javafx.scene.control.Button
-import scalafx.scene.{control => sfxsc}
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
+import scalafx.scene.{control => sfxsc}
 
 class Game() {
   // Initialise the game
@@ -136,19 +136,19 @@ class Game() {
   }
 
   def winGame(): Unit = {
-    new Alert(AlertType.Information){
+    new Alert(AlertType.Information) {
       initOwner(MainApp.stage)
-      title       = "Minesweeper"
-      headerText  = "Congratulations"
+      title = "Minesweeper"
+      headerText = "Congratulations"
       contentText = "You win the game!"
     }.showAndWait()
   }
 
   def loseGame(): Unit = {
-    new Alert(AlertType.Information){
+    new Alert(AlertType.Information) {
       initOwner(MainApp.stage)
-      title       = "Minesweeper"
-      headerText  = "Condolences"
+      title = "Minesweeper"
+      headerText = "Condolences"
       contentText = "You lose the game!"
     }.showAndWait()
   }

@@ -7,7 +7,7 @@ import scalafxml.core.macros.sfxml
 @sfxml
 class MenuController() {
   // Play the game
-  def handlePlay() : Unit = {
+  def handlePlay(): Unit = {
     MainApp.showGame()
   }
 

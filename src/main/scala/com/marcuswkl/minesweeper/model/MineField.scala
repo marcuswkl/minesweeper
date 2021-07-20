@@ -33,16 +33,16 @@ class MineField(val noOfTiles: Int) {
         // Obtain the tile numbers of the surrounding tiles
         val surroundingTilesNo = obtainSurroundingTilesNo(tileNo)
         for (surroundingTileNo <- surroundingTilesNo) {
-            // If it is an empty tile, replace the empty tile with a number tile
-            if (emptyAndMineTiles(surroundingTileNo - 1).tileType == "empty") {
-              emptyAndMineTiles(surroundingTileNo - 1) = new NumberTile()
-              noOfEmptyTiles -= 1
-              noOfNumberTiles += 1
-            }
-            // If it is a number tile, increment the number of the tile
-            else if (emptyAndMineTiles(surroundingTileNo - 1).tileType == "number") {
-              emptyAndMineTiles(surroundingTileNo - 1).asInstanceOf[NumberTile].incrementNumber()
-            }
+          // If it is an empty tile, replace the empty tile with a number tile
+          if (emptyAndMineTiles(surroundingTileNo - 1).tileType == "empty") {
+            emptyAndMineTiles(surroundingTileNo - 1) = new NumberTile()
+            noOfEmptyTiles -= 1
+            noOfNumberTiles += 1
+          }
+          // If it is a number tile, increment the number of the tile
+          else if (emptyAndMineTiles(surroundingTileNo - 1).tileType == "number") {
+            emptyAndMineTiles(surroundingTileNo - 1).asInstanceOf[NumberTile].incrementNumber()
+          }
         }
       }
       tileNo += 1
@@ -52,7 +52,7 @@ class MineField(val noOfTiles: Int) {
 
   // Obtain the tile numbers of the surrounding tiles
   // Top Left -6, Top -5, Top Right -4, Left -1, Right +1, Bottom Left +4, Bottom + 5, Bottom Right + 6
-  def obtainSurroundingTilesNo(tileNo: Int) : List[Int] = {
+  def obtainSurroundingTilesNo(tileNo: Int): List[Int] = {
     tileNo match {
       // If the mine tile is on the top left of the minefield
       case 1 => List(tileNo + 1, tileNo + 5, tileNo + 6)
@@ -71,7 +71,7 @@ class MineField(val noOfTiles: Int) {
       // If the mine tile is on the bottom of the minefield
       case 22 | 23 | 24 => List(tileNo - 6, tileNo - 5, tileNo - 4, tileNo - 1, tileNo + 1)
       // If the mine tile is in the centre area of the minefield
-      case 7 | 8 | 9 | 12 | 13 | 14 | 17 | 18 | 19  => List(tileNo - 6, tileNo - 5, tileNo - 4, tileNo - 1, tileNo + 1,
+      case 7 | 8 | 9 | 12 | 13 | 14 | 17 | 18 | 19 => List(tileNo - 6, tileNo - 5, tileNo - 4, tileNo - 1, tileNo + 1,
         tileNo + 4, tileNo + 5, tileNo + 6)
       // Invalid mine tile number
       case _ => List()

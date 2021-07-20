@@ -1,16 +1,13 @@
 package com.marcuswkl.minesweeper.view
 
-import com.marcuswkl.minesweeper.MainApp
-import com.marcuswkl.minesweeper.model.{EmojiImage, Game, Tile}
-import scalafx.application.Platform
+import com.marcuswkl.minesweeper.model.{EmojiImage, Game}
+import javafx.{scene => jfxs}
 import scalafx.event.ActionEvent
-import scalafx.scene.control.{Alert, Button, Label}
+import scalafx.scene.control.{Button, Label}
 import scalafx.scene.image.ImageView
 import scalafx.scene.layout.TilePane
 import scalafx.scene.paint.Color
 import scalafxml.core.macros.sfxml
-
-import javafx.{scene => jfxs}
 
 @sfxml
 class GameController(private val mineCounter: Label, private val timeCounter: Label, private val emojiImage: ImageView,
@@ -60,12 +57,14 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     // Update the emoji button image
     emojiImage.image = gameInstance.emojiImage.emoji
   }
+
   // Change mode to place flag
   def changeFlagMode(): Unit = {
     gameInstance.changeMode("flag")
     // Update the emoji button image
     emojiImage.image = gameInstance.emojiImage.emoji
   }
+
   // Change mode to place question mark
   def changeQuestionMarkMode(): Unit = {
     gameInstance.changeMode("question mark")
@@ -89,7 +88,7 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     // Update the mine counter value
     mineCounter.text = gameInstance.mineCounter.displayCounterValue()
     // If the game ends
-    if(gameInstance.gameEnded) {
+    if (gameInstance.gameEnded) {
       // Reveal all of the tiles
       gameInstance.revealTiles(tileButtons, gameInstance.mineField.listOfTiles)
       // Hide the time counter
