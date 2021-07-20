@@ -6,10 +6,6 @@ import scalafx.scene.control.Label
 import java.util.{Timer, TimerTask}
 
 class TimeCounter(var counterValue: Int = 0) extends Counter("time") {
-  override def updateCounter(): Unit = {
-    counterValue += 1
-  }
-
   // Display positive digits using three places format (nnn)
   override def displayCounterValue(): String = {
     // Display positive single digit with two leading zeroes
@@ -31,7 +27,7 @@ class TimeCounter(var counterValue: Int = 0) extends Counter("time") {
     // Create a new thread for update execution
     val updateCounterRunnable = new Runnable() {
       def run(): Unit = {
-        updateCounter()
+        incrementCounter()
         counterLabel.text = displayCounterValue()
       }
     }
