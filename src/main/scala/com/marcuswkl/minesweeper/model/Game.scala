@@ -15,6 +15,11 @@ class Game() {
   var questionMarkMarker: QuestionMarkMarker = new QuestionMarkMarker()
   var mode: String = "tile"
 
+  def changeMode(newMode: String): Unit = {
+    mode = newMode
+    emojiButton.updateModeEmoji(newMode)
+  }
+
   // Execute the corresponding action based on the selected mode
   def executeModeAction(tileButton: Button, tile: Tile): Unit = {
     // If the mode is tile
@@ -37,7 +42,7 @@ class Game() {
       // Open the tile
       tile.openTile(tileButton)
       // Update emoji button based on corresponding tile type
-      emojiButton.updateEmoji(tile.tileType)
+      emojiButton.updateTileModeEmoji(tile.tileType)
       // Check game status
       checkStatus(mineField.listOfTiles)
     }

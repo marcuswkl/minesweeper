@@ -59,15 +59,21 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
   // Mode change methods for menu item mode handlers
   // Change mode to open tile
   def changeTileMode(): Unit = {
-    gameInstance.mode = "tile"
+    gameInstance.changeMode("tile")
+    // Update the emoji button image
+    emojiButton.image = gameInstance.emojiButton.emoji
   }
   // Change mode to place flag
   def changeFlagMode(): Unit = {
-    gameInstance.mode = "flag"
+    gameInstance.changeMode("flag")
+    // Update the emoji button image
+    emojiButton.image = gameInstance.emojiButton.emoji
   }
   // Change mode to place question mark
   def changeQuestionMarkMode(): Unit = {
-    gameInstance.mode = "question mark"
+    gameInstance.changeMode("question mark")
+    // Update the emoji button image
+    emojiButton.image = gameInstance.emojiButton.emoji
   }
 
   // Handle tile button click
