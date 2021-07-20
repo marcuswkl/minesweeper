@@ -86,91 +86,51 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     if (gameInstance.mode == "tile") {
       // If the tile is not marked
       if (!tile.isFlagMarked && !tile.isQuestionMarked) {
-        // Unhide the button text to show the symbol
-        tileButton.setTextFill(Color.Black)
-        // Change the look of the button to indicate clicked
-        tileButton.setEffect(new InnerShadow())
-        // Execute corresponding tile click method
-        tile.tileClick()
+        // Open the tile
+        tile.openTile(tileButton)
         // Update emoji button based on corresponding tile type
-        gameInstance.emojiButton.updateEmoji(tile.tileType)
-        emojiButton.image = gameInstance.emojiButton.emoji
+        gameInstance.emojiButton.updateEmoji(tile.tileType, emojiButton)
         // Check game status
         gameInstance.checkStatus(gameInstance.mineField.listOfTiles)
       }
       // If the tile is marked
       else {
-        // Hide the button text before replacing the marker symbol
-        tileButton.setTextFill(Color.Transparent)
-        // Replace the marker symbol with the corresponding tile symbol
-        tileButton.setText(tile.symbol)
-        // Unmark the tile
-        if (tile.isFlagMarked) {
-          tile.isFlagMarked = false
-        } else {
-          tile.isQuestionMarked = false
-        }
+        tile.removeMark(tileButton)
       }
     }
     // If the mode is place flag
     else if (gameInstance.mode == "flag") {
       // If the tile is not opened
-      if (!tile.isTileClicked) {
+      if (!tile.isOpened) {
         // If the tile is not marked
         if (!tile.isFlagMarked && !tile.isQuestionMarked) {
-          // Replace the corresponding tile symbol with the flag marker symbol
-          tileButton.setText(gameInstance.flagMarker.symbol)
-          // Unhide the button text to show the symbol
-          tileButton.setTextFill(Color.Black)
-          // Mark the tile as flag marked
-          tile.isFlagMarked = true
+          gameInstance.flagMarker.placeMarker(tileButton, tile)
         }
         // If the tile is question marked
         else if (tile.isQuestionMarked) {
-          // Replace the question mark marker symbol with the flag marker symbol
-          tileButton.setText(gameInstance.flagMarker.symbol)
-          // Change the mark of the tile to flag marked
-          tile.isQuestionMarked = false
-          tile.isFlagMarked = true
+          gameInstance.flagMarker.replaceMarker(tileButton, tile)
         }
-        // If the tile is flag marked
+        // If the tile is flag marked already
         else {
-          // Hide the button text before replacing the flag marker symbol
-          tileButton.setTextFill(Color.Transparent)
-          // Replace the flag marker symbol with the corresponding tile symbol
-          tileButton.setText(tile.symbol)
-          // Unmark the tile
-          tile.isFlagMarked = false
+          gameInstance.flagMarker.removeMarker(tileButton, tile)
         }
       }
-    } else {
+    }
+    // If the mode is place question mark
+    else {
       // If the tile is not opened
-      if (!tile.isTileClicked) {
+      if (!tile.isOpened) {
         // If the tile is not marked
         if (!tile.isFlagMarked && !tile.isQuestionMarked) {
-          // Replace the corresponding tile symbol with the question mark marker symbol
-          tileButton.setText(gameInstance.questionMarkMarker.symbol)
-          // Unhide the button text to show the symbol
-          tileButton.setTextFill(Color.Black)
-          // Mark the tile as question marked
-          tile.isQuestionMarked = true
+          gameInstance.questionMarkMarker.placeMarker(tileButton, tile)
         }
         // If the tile is flag marked
         else if (tile.isFlagMarked) {
-          // Replace the flag marker symbol with the question mark marker symbol
-          tileButton.setText(gameInstance.questionMarkMarker.symbol)
-          // Change the mark of the tile to question marked
-          tile.isFlagMarked = false
-          tile.isQuestionMarked = true
+          gameInstance.questionMarkMarker.replaceMarker(tileButton, tile)
         }
-        // If the tile is question marked
+        // If the tile is question marked already
         else {
-          // Hide the button text before replacing the question mark marker symbol
-          tileButton.setTextFill(Color.Transparent)
-          // Replace the question mark marker symbol with the corresponding tile symbol
-          tileButton.setText(tile.symbol)
-          // Unmark the tile
-          tile.isQuestionMarked = false
+          gameInstance.questionMarkMarker.removeMarker(tileButton, tile)
         }
       }
     }
