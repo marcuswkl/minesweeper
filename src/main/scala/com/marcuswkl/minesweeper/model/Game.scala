@@ -43,7 +43,10 @@ class Game() {
     }
     // If the tile is marked
     else {
-      tile.removeMark(tileButton)
+      val markType = tile.removeMark(tileButton)
+      if (markType == "flag") {
+        mineCounter.incrementCounter()
+      }
     }
   }
 
@@ -53,14 +56,17 @@ class Game() {
       // If the tile is not marked
       if (!tile.isFlagMarked && !tile.isQuestionMarked) {
         flagMarker.placeMarker(tileButton, tile)
+        mineCounter.decrementCounter()
       }
       // If the tile is question marked
       else if (tile.isQuestionMarked) {
         flagMarker.replaceMarker(tileButton, tile)
+        mineCounter.decrementCounter()
       }
       // If the tile is flag marked already
       else {
         flagMarker.removeMarker(tileButton, tile)
+        mineCounter.incrementCounter()
       }
     }
   }
@@ -75,6 +81,7 @@ class Game() {
       // If the tile is flag marked
       else if (tile.isFlagMarked) {
         questionMarkMarker.replaceMarker(tileButton, tile)
+        mineCounter.incrementCounter()
       }
       // If the tile is question marked already
       else {

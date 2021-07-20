@@ -83,6 +83,8 @@ class GameController(private val mineCounter: Label, private val timeCounter: La
     gameInstance.executeModeAction(tileButton, tile)
     // Update the emoji button image
     emojiButton.image = gameInstance.emojiButton.emoji
+    // Update the mine counter value
+    mineCounter.text = gameInstance.mineCounter.displayCounterValue()
   }
 
   // Start the time counter

@@ -21,7 +21,8 @@ abstract class Tile(val tileType: String) {
   }
 
   // All tiles remove mark the same way
-  def removeMark(tileButton: Button): Unit = {
+  def removeMark(tileButton: Button): String = {
+    var markType = ""
     // Hide the button text before replacing the marker symbol
     tileButton.setTextFill(Color.Transparent)
     // Replace the marker symbol with the corresponding tile symbol
@@ -29,9 +30,12 @@ abstract class Tile(val tileType: String) {
     // Update the tile status as not marked
     if (isFlagMarked) {
       isFlagMarked = false
-    }
-    if (isQuestionMarked) {
+      markType = "flag"
+    } else if (isQuestionMarked) {
       isQuestionMarked = false
+      markType = "question mark"
     }
+    // Return the mark type removed
+    markType
   }
 }
