@@ -25,17 +25,17 @@
                 </Menu>
             <Menu text="_Mode">
                <items>
-                  <MenuItem onAction="#handleTile" text="_Tile">
+                  <MenuItem onAction="#handleTileMode" text="_Tile">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="T" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem onAction="#handleFlag" text="_Flag">
+                  <MenuItem onAction="#handleFlagMode" text="_Flag">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="F" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem onAction="#handleQuestionMark" text="_Question Mark">
+                  <MenuItem onAction="#handleQuestionMarkMode" text="_Question Mark">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="Q" control="UP" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>

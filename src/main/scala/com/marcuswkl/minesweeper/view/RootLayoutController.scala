@@ -29,10 +29,10 @@ class RootLayoutController() {
   }
 
   // Change mode to open tile
-  def handleTile(): Unit = {
+  def handleTileMode(): Unit = {
     if (MainApp.gameStarted) {
       MainApp.gameControllerOption match {
-        case Some(gameController) => gameController.handleOpenTile()
+        case Some(gameController) => gameController.changeTileMode()
         case None => throw new Exception("Game controller not initialised.")
       }
     } else {
@@ -41,10 +41,10 @@ class RootLayoutController() {
   }
 
   // Change mode to place flag
-  def handleFlag(): Unit = {
+  def handleFlagMode(): Unit = {
     if (MainApp.gameStarted) {
       MainApp.gameControllerOption match {
-        case Some(gameController) => gameController.handlePlaceFlag()
+        case Some(gameController) => gameController.changeFlagMode()
         case None => throw new Exception("Game controller not initialised.")
       }
     } else {
@@ -53,10 +53,10 @@ class RootLayoutController() {
   }
 
   // Change mode to place question mark
-  def handleQuestionMark(): Unit = {
+  def handleQuestionMarkMode(): Unit = {
     if (MainApp.gameStarted) {
       MainApp.gameControllerOption match {
-        case Some(gameController) => gameController.handlePlaceQuestionMark()
+        case Some(gameController) => gameController.changeQuestionMarkMode()
         case None => throw new Exception("Game controller not initialised.")
       }
     } else {
